@@ -24,7 +24,6 @@
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Constants\" />
     <Folder Include="Dependency\" />
     <Folder Include="Implementations\" />
     <Folder Include="Migrations\" />
