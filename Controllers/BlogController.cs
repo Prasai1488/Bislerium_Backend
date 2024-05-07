@@ -1,4 +1,8 @@
-﻿using BisleriumBloggers.Models;
+﻿using BisleriumBloggers.DTOs.Base;
+using BisleriumBloggers.DTOs.Blog;
+using BisleriumBloggers.Interfaces.Repositories.Base;
+using BisleriumBloggers.Interfaces.Services;
+using BisleriumBloggers.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

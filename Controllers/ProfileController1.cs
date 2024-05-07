@@ -1,4 +1,10 @@
-﻿using BisleriumBloggers.Models;
+﻿using BisleriumBloggers.DTOs.Base;
+using BisleriumBloggers.DTOs.Email;
+using BisleriumBloggers.DTOs.Profile;
+using BisleriumBloggers.Interfaces.Repositories.Base;
+using BisleriumBloggers.Interfaces.Services;
+using BisleriumBloggers.Models;
+using BisleriumBloggers.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
