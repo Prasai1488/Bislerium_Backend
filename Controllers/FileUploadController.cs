@@ -36,8 +36,8 @@ public class FileUploadController : Controller
 
         var filePaths = filePathIndex switch
         {
-            1 => Constants.FilePath.UsersImagesFilePath,
-            2 => Constants.FilePath.BlogsImagesFilePath,
+            1 => Constants.Constants.FilePath.UsersImagesFilePath,
+            2 => Constants.Constants.FilePath.BlogsImagesFilePath,
             _ => ""
         };
 

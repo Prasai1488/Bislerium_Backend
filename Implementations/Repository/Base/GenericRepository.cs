@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Linq;
+using BisleriumBloggers.Persistence;
 
 namespace BisleriumBloggers.Implementations.Repository.Base;
 

@@ -1,5 +1,9 @@
-﻿using BisleriumBloggers.Interfaces.Repositories.Base;
+﻿using BisleriumBloggers.Implementations.Repository.Base;
+using BisleriumBloggers.Implementations.Services;
+using BisleriumBloggers.Interfaces.Repositories.Base;
 using BisleriumBloggers.Interfaces.Services;
+using BisleriumBloggers.Persistence;
+using BisleriumBloggers.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
 
 namespace BisleriumBloggers.Dependency;
@@ -12,7 +16,7 @@ public static class InfrastructureService
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString,
-        b => b.MigrationsAssembly("Bislerium.Infrastructure")));
+        b => b.MigrationsAssembly("BisleriumBloggers")));
         services.AddScoped<IDbInitializer, DbInitializer>();
 
         services.AddTransient<IGenericRepository, GenericRepository>();

@@ -61,14 +61,14 @@ public class AdminController : Controller
 
         if (existingUser == null)
         {
-            var role = _genericRepository.GetFirstOrDefault<Role>(x => x.Name == Constants.Roles.Admin);
+            var role = _genericRepository.GetFirstOrDefault<Role>(x => x.Name == "Admin");
 
             var appUser = new User
             {
                 FullName = register.FullName,
                 EmailAddress = register.EmailAddress,
                 RoleId = role!.Id,
-                Password = Password.HashSecret(Constants.Passwords.AdminPassword),
+                Password = Password.HashSecret("Admin@123"),
                 UserName = register.Username,
                 MobileNo = register.MobileNumber,
                 ImageURL = register.ImageURL

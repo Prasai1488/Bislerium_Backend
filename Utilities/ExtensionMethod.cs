@@ -1,6 +1,6 @@
 ﻿namespace BisleriumBloggers.Utilities;
 
-public class ExtensionMethod
+public static class ExtensionMethod
 {
     public static string SetUniqueFileName(this string fileExtension)
     {

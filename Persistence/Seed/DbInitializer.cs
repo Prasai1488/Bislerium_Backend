@@ -14,11 +14,13 @@ public class DbInitializer(IGenericRepository genericRepository) : IDbInitialize
             {
                 var admin = new Role()
                 {
-                    Name = Constants.Roles.Admin
+                    Name = "Admin",
+                    Description = ""
                 };
                 var blogger = new Role()
                 {
-                    Name = Constants.Roles.Blogger
+                    Name = "Blogger",
+                    Description = ""
                 };
 
                 genericRepository.Insert(admin);
@@ -27,14 +29,14 @@ public class DbInitializer(IGenericRepository genericRepository) : IDbInitialize
 
             if (genericRepository.Get<User>().Any()) return;
 
-            var adminRole = genericRepository.GetFirstOrDefault<Role>(x => x.Name == Constants.Roles.Admin);
+            var adminRole = genericRepository.GetFirstOrDefault<Role>(x => x.Name == "Admin");
 
             var superAdminUser = new User
             {
                 FullName = "Super Admin",
                 EmailAddress = "superadmin@superadmin.com",
                 UserName = "superadmin@superadmin.com",
-                Password = Password.HashSecret(Constants.Passwords.AdminPassword),
+                Password = Password.HashSecret("Admin@123"),
                 RoleId = adminRole.Id,
                 MobileNo = "+977 9803364638",
                 ImageURL = null
