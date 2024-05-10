@@ -1,12 +1,15 @@
-﻿using BisleriumBloggers.DTOs.Base;
+﻿using Azure;
+using BisleriumBloggers.DTOs.Base;
 using BisleriumBloggers.DTOs.Blog;
 using BisleriumBloggers.Interfaces.Repositories.Base;
 using BisleriumBloggers.Interfaces.Services;
 using BisleriumBloggers.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Reflection.Metadata;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BisleriumBloggers.Controllers;
 [Authorize]
@@ -23,6 +26,10 @@ public class BlogController : Controller
         _userService = userService;
     }
 
+
+
+    /*This method creates a new blog post, assigns it to the current user, and returns a success response upon insertion.*/
+
     [HttpPost("create-blog")]
     public IActionResult CreateBlog(BlogCreateDto blog)
     {
@@ -36,7 +43,7 @@ public class BlogController : Controller
             Body = blog.Body,
             Location = blog.Location,
             Reaction = blog.Reaction,
-            BlogImages = blog.Images.Select(x => new BlogImage()
+            BlogImages = blog.Images?.Select(x => new BlogImage()
             {
                 ImageURL = x,
                 IsActive = true,
@@ -45,7 +52,10 @@ public class BlogController : Controller
             }).ToList(),
             CreatedAt = DateTime.Now,
             CreatedBy = user.Id,
+        
+        
         };
+
 
         _genericRepository.Insert(blogModel);
 
@@ -59,6 +69,8 @@ public class BlogController : Controller
         });
     }
 
+
+    /*This method updates a blog post, creates a log of the update, and returns a success response upon successful update*/
     [HttpPatch("update-blog")]
     public IActionResult UpdateBlog(BlogDetailsDto blog)
     {
@@ -102,6 +114,9 @@ public class BlogController : Controller
         });
     }
 
+
+    /*This method soft deletes a blog post, updating its status and recording deletion details,
+    and returns a success response upon completion*/
     [HttpDelete("delete-blog/{blogId:int}")]
     public IActionResult DeletePost(int blogId)
     {

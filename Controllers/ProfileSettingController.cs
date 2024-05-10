@@ -1,4 +1,6 @@
-﻿using BisleriumBloggers.DTOs.Base;
+﻿// ! // Importing necessary namespaces
+
+using BisleriumBloggers.DTOs.Base;
 using BisleriumBloggers.DTOs.Email;
 using BisleriumBloggers.DTOs.Profile;
 using BisleriumBloggers.Interfaces.Repositories.Base;
@@ -11,7 +13,11 @@ using Microsoft.VisualBasic;
 using System.Net;
 using System.Reflection.Metadata;
 
+
+// Defining the namespace and class for profile controller
 namespace BisleriumBloggers.Controllers;
+
+// Attributes for authorization, API controller, and route
 [Authorize]
 [ApiController]
 [Route("api/profile")]
@@ -21,13 +27,14 @@ public class ProfileController : Controller
     private readonly IEmailService _emailService;
     private readonly IGenericRepository _genericRepository;
 
+// Constructor injection for required services
     public ProfileController(IEmailService emailService, IGenericRepository genericRepository, IUserService userService)
     {
         _emailService = emailService;
         _genericRepository = genericRepository;
         _userService = userService;
     }
-
+// GET method to fetch profile details
     [HttpGet("profile-details")]
     public IActionResult GetProfileDetails()
     {
@@ -45,10 +52,10 @@ public class ProfileController : Controller
             EmailAddress = user.EmailAddress,
             RoleId = role.Id,
             RoleName = role.Name,
-            ImageURL = user.ImageURL ?? "sample-profile.png",
+            ImageURL = user.ImageURL ?? "dummy.svg",
             MobileNumber = user.MobileNo ?? ""
         };
-
+ // Returning profile details response
         return Ok(new ResponseDto<ProfileDetailsDto>()
         {
             Message = "Successfully Fetched",
@@ -59,6 +66,7 @@ public class ProfileController : Controller
         });
     }
 
+// PATCH method to update profile details
     [HttpPatch("update-profile")]
     public IActionResult UpdateProfileDetails(ProfileDetailsDto profileDetails)
     {
@@ -66,9 +74,11 @@ public class ProfileController : Controller
 
         user.FullName = profileDetails.FullName;
         user.MobileNo = profileDetails.MobileNumber;
+        user.EmailAddress = profileDetails.EmailAddress;
 
         _genericRepository.Update(user);
 
+ // Returning update profile response
         return Ok(new ResponseDto<object>()
         {
             Message = "Successfully Updated",
@@ -79,6 +89,7 @@ public class ProfileController : Controller
         });
     }
 
+// DELETE method to delete user profile
     [HttpDelete("delete-profile")]
     public IActionResult DeleteProfile()
     {
@@ -104,6 +115,7 @@ public class ProfileController : Controller
 
         _genericRepository.Delete(user);
 
+ // Returning delete profile response
         return Ok(new ResponseDto<object>()
         {
             Message = "Successfully Deleted",
@@ -114,6 +126,7 @@ public class ProfileController : Controller
         });
     }
 
+// POST method to change user password
     [HttpPost("change-password")]
     public IActionResult ChangePassword(ChangePasswordDto changePassword)
     {
@@ -129,6 +142,7 @@ public class ProfileController : Controller
 
             _genericRepository.Update(user);
 
+ // Returning change password response
             return Ok(new ResponseDto<object>()
             {
                 Message = "Successfully Updated",
@@ -139,6 +153,7 @@ public class ProfileController : Controller
             });
         }
 
+// Returning invalid password response
         return BadRequest(new ResponseDto<object>()
         {
             Message = "Password not valid",
@@ -149,6 +164,7 @@ public class ProfileController : Controller
         });
     }
 
+ // POST method to reset user password
     [HttpPost("reset-password")]
     public IActionResult ResetPassword(string emailAddress)
     {
@@ -156,6 +172,7 @@ public class ProfileController : Controller
 
         if (user == null)
         {
+             // Returning user not found response
             return BadRequest(new ResponseDto<object>()
             {
                 Message = "User not found",
@@ -184,6 +201,7 @@ public class ProfileController : Controller
 
         _emailService.SendEmail(email);
 
+ // Returning reset password response
         return Ok(new ResponseDto<object>()
         {
             Message = "Successfully Updated",

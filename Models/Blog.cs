@@ -12,5 +12,5 @@ public class Blog : BaseEntity<int>
 
     public string Reaction { get; set; }  // User is feeling excited, sad, nervous, happy, exotic and so on.
 
-    public virtual ICollection<BlogImage> BlogImages { get; set; }
+    public virtual ICollection<BlogImage>? BlogImages { get; set; }
 }

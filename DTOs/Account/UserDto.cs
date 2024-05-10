@@ -1,5 +1,6 @@
 ﻿namespace BisleriumBloggers.DTOs.Account;
 
+  // Data transfer object for user information
 public class UserDto
 {
     public int Id { get; set; }
@@ -12,6 +13,8 @@ public class UserDto
 
     public string Role { get; set; }
 
+    public string ImageUrl { get; set; }
+    
     public string EmailAddress { get; set; }
 
     public string Token { get; set; }

@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>7ca3c474-4091-4d5b-a3c1-ccefcc0683fa</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\blog-images\" />
   </ItemGroup>
 
 </Project>

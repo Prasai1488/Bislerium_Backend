@@ -1,7 +1,10 @@
 ﻿namespace BisleriumBloggers.DTOs.Account;
 
+// Data transfer object for registration information
 public class RegisterDto
 {
+
+    // Username field
     public string Username { get; set; }
 
     public string EmailAddress { get; set; }

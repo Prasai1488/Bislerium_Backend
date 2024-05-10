@@ -12,6 +12,8 @@ using System.Net;
 using System.Reflection.Metadata;
 
 using BisleriumBloggers.Constants;
+using Azure.Core;
+using Azure;
 
 namespace BisleriumBloggers.Controllers;
 
@@ -27,9 +29,12 @@ public class AdminController : Controller
         _genericRepository = genericRepository;
     }
 
+    /*This method retrieves all users and their details, including their roles, and returns them in a response object*/
+
     [HttpGet("get-all-users")]
     public IActionResult GetAllUsers()
     {
+    
         var users = _genericRepository.Get<User>();
 
         var result = users.Select(x => new UserDetailDto()
@@ -37,7 +42,7 @@ public class AdminController : Controller
             Id = x.Id,
             RoleId = x.RoleId,
             EmailAddress = x.EmailAddress,
-            ImageURL = x.ImageURL ?? "sample-profile.png",
+            ImageURL = x.ImageURL ?? "dummy.svg",
             Username = x.UserName,
             Name = x.FullName,
             RoleName = _genericRepository.GetById<Role>(x.RoleId).Name
@@ -52,6 +57,8 @@ public class AdminController : Controller
             TotalCount = 1
         });
     }
+
+    /*This method registers new administrators and returns success or bad request based on user existence.*/
 
     [HttpPost("register-admin")]
     public IActionResult RegisterAdministrator(RegisterDto register)
@@ -95,6 +102,9 @@ public class AdminController : Controller
             TotalCount = 0
         });
     }
+
+    /*This method fetches dashboard details, including post count, comment count, upvotes, 
+    downvotes, and blog popularity, and returns them in a response.*/
 
     [HttpGet("dashboard-details")]
     public IActionResult GetDashboardDetails()
